@@ -40,7 +40,7 @@ For more informaiton, please refer to [EDSR(PyTorch)](https://github.com/thstkdg
 
 ## Test
 ### Quick start
-1. Download the pre-trained DLSN with scale factor 3 from [BaiduYun](https://pan.baidu.com/s/1EEkNZ9FieZDnFHSILWhH9A?pwd=udgx) or [GoogleDrive](https://github.com/thstkdgus35/EDSR-PyTorch) and place it in '/experiment/DLSN_x3/model'.
+1. Download the pre-trained DLSN with scale factor 3 from [BaiduYun](https://pan.baidu.com/s/1EEkNZ9FieZDnFHSILWhH9A?pwd=udgx) or [GoogleDrive](https://drive.google.com/file/d/1uZRVWhQ-bo8c9eEjpdE5fLVDeIpTE1pn/view?usp=sharing) and place it in '/experiment/DLSN_x3/model'.
 2. Place the original test sets (e.g., Set5, other test sets are available from [GoogleDrive](https://drive.google.com/drive/folders/1xyiuTr6ga6ni-yfTP7kyPHRmfBakWovo) ) in '../SrBenchmark'.
 3. Cd to 'src', run the following scripts.
 
