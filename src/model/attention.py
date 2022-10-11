@@ -74,29 +74,24 @@ class GLA(nn.Module):
         mod_indices = (indices % L) #now range from (0->H*W)
 
         x_embed_sorted = common.batched_index_select(x_embed, mod_indices) #[N,n_hashes*H*W,C]
-        x_embed_extra_index_sorted = common.batched_index_select(x_embed_extra_index, mod_indices)   # [1, n_hashes*HW, 1]
         y_embed_sorted = common.batched_index_select(y_embed, mod_indices) #[N,n_hashes*H*W,C]
         fc_embed_embed_sorted = common.batched_index_select(fc_embed, mod_indices) #[N,n_hashes*H*W,C]
 
         #pad the embedding if it cannot be divided by chunk_size
         padding = self.chunk_size - L%self.chunk_size if L%self.chunk_size!=0 else 0
         x_att_buckets = torch.reshape(x_embed_sorted, (N, self.n_hashes,-1, C)) #[N, n_hashes, H*W,C]
-        x_extra_index_att_buckets = torch.reshape(x_embed_extra_index_sorted, (1, self.n_hashes, -1, 1))  # [N, n_hashes, H*W,C]
         y_att_buckets = torch.reshape(y_embed_sorted, (N, self.n_hashes,-1, C*self.reduction))
         fc_att_buckets = torch.reshape(fc_embed_embed_sorted, (N, self.n_hashes,-1, C*self.reduction))
 
         if padding:
             pad_x = x_att_buckets[:,:,-padding:,:].clone()
-            pad_x_extra_index = x_extra_index_att_buckets[:, :, -padding:, :].clone()
             pad_y = y_att_buckets[:,:,-padding:,:].clone()
             pad_fc = fc_att_buckets[:,:,-padding:,:].clone()
             x_att_buckets = torch.cat([x_att_buckets,pad_x],dim=2)
-            x_extra_index_att_buckets = torch.cat([x_extra_index_att_buckets, pad_x_extra_index], dim=2)
             y_att_buckets = torch.cat([y_att_buckets,pad_y],dim=2)
             fc_att_buckets = torch.cat([fc_att_buckets,pad_fc],dim=2)
 
         x_att_buckets = torch.reshape(x_att_buckets,(N,self.n_hashes,-1,self.chunk_size,C)) #[N, n_hashes, num_chunks, chunk_size, C] # q
-        x_extra_index_att_buckets = torch.reshape(x_extra_index_att_buckets, (1, self.n_hashes, -1, self.chunk_size, 1))  # [1, n_hashes, num_chunks, chunk_size, 1]
         y_att_buckets = torch.reshape(y_att_buckets,(N,self.n_hashes,-1,self.chunk_size, C*self.reduction))
         fc_att_buckets = torch.reshape(fc_att_buckets,(N,self.n_hashes,-1,self.chunk_size, C*self.reduction))
 
@@ -104,7 +99,6 @@ class GLA(nn.Module):
 
         #allow attend to adjacent buckets
         x_match = self.add_adjacent_buckets(x_match) #[N, n_hashes, num_chunks, chunk_size*3, C]  # k
-        x_extra_index_match = self.add_adjacent_buckets(x_extra_index_att_buckets)
         y_att_buckets = self.add_adjacent_buckets(y_att_buckets)
         fc_att_buckets = self.add_adjacent_buckets(fc_att_buckets)
         fc_raw_score = self.fc(fc_att_buckets).permute(0,1,2,4,3) #[N, n_hashes, num_chunks, chunk_size, chunk_size*3]
