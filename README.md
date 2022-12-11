@@ -1,12 +1,13 @@
 # Global Learnable Attention for Single Image Super-Resolution
-This project is for DLSN introduced in the following paper "Global Learnable Attention for Single Image Super-Resolution", submitted to IEEE TPAMI.
+This project is for DLSN introduced in the following paper "Global Learnable Attention for Single Image Super-Resolution", submitted to IEEE TPAMI. (Accept (10-Dec-2022))
 
 The code is test on Ubuntu 16.04 environment (Python3.6, PyTorch >= 1.1.0) with Nvidia 3090 GPUs. 
 ## Contents
 1. [Introduction](#introduction)
 2. [Train](#train)
 3. [Test](#test)
-4. [Acknowledgements](#acknowledgements)
+4. [Visual Results](#results)
+5. [Acknowledgements](#acknowledgements)
 
 ## Introduction
 
@@ -51,6 +52,9 @@ For more informaiton, please refer to [EDSR(PyTorch)](https://github.com/thstkdg
     # Example X3 SR
     python main.py --dir_data ../../ --data_test Set5+Set14+B100+Urban100+Manga109 --n_GPUs 1 --rgb_range 1 --save_models --save_results --n_resgroups 10 --n_resblocks 4 --n_feats 256 --res_scale 0.1 --model DLSN --pre_train ../experiment/DLSN_x3/model/DLSN_x3.pt --save Temp --data_range 1-800/1-5 --scale 3 --test_only --reduction 4 --chunk_size 128 --n_hashes 3 --chop
     ```
+
+## Visual Results
+Visual results on Urban100 and Manga109 with scale factor 4 are available from [BaiduYun](https://pan.baidu.com/s/1LUPwhtbE1ySrHVSH1Bo3Og?pwd=ip0c) or [GoogleDrive](https://drive.google.com/drive/folders/1_NgMFcPk2G6ccZ-QQiG06KqNadi_7Z8J?usp=share_link).
 
 ## Acknowledgements
 This code is built on [EDSR (PyTorch)](https://github.com/thstkdgus35/EDSR-PyTorch). We thank the authors for sharing their codes.
