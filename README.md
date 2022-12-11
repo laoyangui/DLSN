@@ -1,5 +1,5 @@
 # Global Learnable Attention for Single Image Super-Resolution
-This project is for DLSN introduced in the following paper "Global Learnable Attention for Single Image Super-Resolution", submitted to IEEE TPAMI. (Accept (10-Dec-2022))
+This project is for DLSN introduced in the following paper "Global Learnable Attention for Single Image Super-Resolution", submitted to IEEE TPAMI. (**Accept** (10-Dec-2022))
 
 The code is test on Ubuntu 16.04 environment (Python3.6, PyTorch >= 1.1.0) with Nvidia 3090 GPUs. 
 ## Contents
