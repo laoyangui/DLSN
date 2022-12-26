@@ -8,6 +8,7 @@ The code is test on Ubuntu 16.04 environment (Python3.6, PyTorch >= 1.1.0) with 
 3. [Test](#test)
 4. [Results](#results)
 5. [Acknowledgements](#acknowledgements)
+6. [Cite](#cite)
 
 ## Introduction
 
@@ -58,3 +59,16 @@ Visual results on Urban100 and Manga109 with scale factor 4 are available from [
 
 ## Acknowledgements
 This code is built on [EDSR (PyTorch)](https://github.com/thstkdgus35/EDSR-PyTorch). We thank the authors for sharing their codes.
+
+## Cite
+If you find our work useful in your research or publication, please cite our work:
+```
+@article{su2022global,
+  title={Global Learnable Attention for Single Image Super-Resolution},
+  author={Su, Jian-Nan and Gan, Min and Chen, Guang-Yong and Yin, Jia-Li and Chen, CL Philip},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2022},
+  doi={10.1109/TPAMI.2022.3229689},
+  publisher={IEEE}
+}
+```
