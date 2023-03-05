@@ -35,8 +35,11 @@ For more informaiton, please refer to [EDSR(PyTorch)](https://github.com/thstkdg
     **Example command is in the file 'demo.sh'.**
 
     ```bash
-    # Example X3 SR
-    python main.py --dir_data ../../SrTrainingData --data_range 1-800/1-5 --n_GPUs 1 --rgb_range 1 --chunk_size 128 --n_hashes 3 --save_models --lr 1e-4 --decay 300-600-900-1200 --epochs 1500 --chop --save_results --data_test Set5 --n_resgroups 10 --n_resblocks 4 --n_feats 256 --reduction 4 --res_scale 0.1 --batch_size 16 --model DLSN --scale 3 --patch_size 144 --save DLSN_x3 --data_train DIV2K
+    # Example X2 SR
+    python main.py --dir_data ../../SrTrainingData --data_range 1-800/1-5 --n_GPUs 1 --rgb_range 1 --chunk_size 128 --n_hashes 3 --save_models --lr 1e-4 --decay 300-600-900-1200 --epochs 1500 --chop --save_results --data_test Set5 --n_resgroups 10 --n_resblocks 4 --n_feats 256 --reduction 4 --res_scale 0.1 --batch_size 16 --model DLSN --scale 2 --patch_size 96 --save DLSN_x2 --data_train DIV2K
+
+    # Example X3 SR, Using X2 pre-trained model.
+    python main.py --dir_data ../../SrTrainingData --data_range 1-800/1-5 --n_GPUs 1 --rgb_range 1 --chunk_size 128 --n_hashes 3 --save_models --lr 1e-4 --decay 300-600-900-1200 --epochs 1500 --chop --save_results --data_test Set5 --n_resgroups 10 --n_resblocks 4 --n_feats 256 --reduction 4 --res_scale 0.1 --batch_size 16 --pre_train ../experiment/DLSN_x2/model/DLSN_x2.pt --model DLSN --scale 3 --patch_size 144 --save DLSN_x3 --data_train DIV2K 
 
     ```
 
