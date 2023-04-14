@@ -33,7 +33,7 @@ class GLA(nn.Module):
         random_rotations = torch.nn.init.orthogonal_(torch.empty(x.shape[-1], hash_buckets))
         for _ in range(self.n_hashes-1):
             random_rotations = torch.cat([random_rotations, torch.nn.init.orthogonal_(torch.empty(x.shape[-1],hash_buckets))], dim=-1)
-        # Training under multi-gpu: random_rotations.cuda() -> andom_rotations.to(x.device) (suggested by Breeze-Zero from github: https://github.com/laoyangui/DLSN/issues/2)
+        # Training under multi-gpu: random_rotations.cuda() -> random_rotations.to(x.device) (suggested by Breeze-Zero from github: https://github.com/laoyangui/DLSN/issues/2)
         random_rotations = random_rotations.reshape(rotations_shape[0], rotations_shape[1], rotations_shape[2], hash_buckets).expand(N, -1, -1, -1).cuda() #[N, C, n_hashes, hash_buckets]
         rotated_vecs = torch.einsum('btf,bfhi->bhti', x, random_rotations) #[N, n_hashes, H*W, hash_buckets]
 
