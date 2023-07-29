@@ -36,9 +36,9 @@ class GLAFFM(nn.Module):
         modules_body = []
         modules_body = [
             LFFB(conv, n_feat, kernel_size, 16, bias=True, bn=False, act=nn.ReLU(True), res_scale=1) \
-            for _ in range(n_resblocks)]
+            for _ in range(n_resblocks)] # To stabilize the training, you can try lowering the value of res_scale.
 
-        modules_body.append(attention.GLA(channels=n_feat, chunk_size=chunk_size, n_hashes=n_hashes, reduction=reduction, res_scale=1))
+        modules_body.append(attention.GLA(channels=n_feat, chunk_size=chunk_size, n_hashes=n_hashes, reduction=reduction, res_scale=1)) # To stabilize the training, you can try lowering the value of res_scale.
         modules_body.append(conv(n_feat, n_feat, kernel_size))
         self.body = nn.Sequential(*modules_body)
         self.res_scale = res_scale
